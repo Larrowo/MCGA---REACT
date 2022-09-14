@@ -21,35 +21,29 @@ const App = () => {
 
   console.log(todos);
 
-  const addTodo = todo => {
+  const addTodo = (todo) => {
     todo.id = Math.floor(Math.random() * 100);
     todo.completed = false;
     setTodos([...todos, todo]);
   };
 
-  const removeTodo = id => {
-    setTodos(todos.filter(todo => todo.id !== id));
-    console.log(todos.filter(todo => todo.id !== id));
+  const removeTodo = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+    console.log(todos.filter((todo) => todo.id !== id));
   };
 
-  const completeTodo = id => {
+  const completeTodo = (id) => {
     setCompleteTodos(
-      completedTodos.filter(todo =>
-        todo.id === id ? (todo.completed = true) : false
-      )
+      ...completedTodos,
+      todos.filter((todo) => todo.completed === true)
     );
-    console.log(
-      completedTodos.filter(todo =>
-        todo.id === id ? (todo.completed = true) : false
-      )
-    );
+    console.log(completedTodos);
   };
-  // console.log(todos);
 
   return (
     <div className="App">
       <Form addTodo={addTodo} />
-      {todos.map(todo => (
+      {todos.map((todo) => (
         <TodoItem
           todo={todo}
           key={todo.id}
@@ -60,10 +54,10 @@ const App = () => {
 
       {!todos.length && <p>No todos</p>}
 
-      <div>
-        {completedTodos.map(todo =>
-          todo.completed ? <TodoItem todo={todo} /> : ""
-        )}
+      <div className="div2">
+        {completedTodos.map(() => (
+          <TodoItem></TodoItem>
+        ))}
       </div>
     </div>
   );
